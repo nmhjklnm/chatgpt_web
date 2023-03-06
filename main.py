@@ -6,12 +6,7 @@ st.set_page_config(page_title="Your App", layout="wide")
 
 import streamlit as st
 
-keys = ["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",
-            "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",
-            "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",
-            "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",
-            "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",
-            "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"
+keys = ["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"
             ]
 
 models = {
