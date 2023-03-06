@@ -79,6 +79,8 @@ def main():
 
                 response = generate_response("\n".join(chat_history), models[model], keys[index])
                 chat_history.append("ChatGPT: " + response)
+                if "state" not in st.session_state:
+                     st.session_state.state = get_state()
                 st.session_state.state["chat_history"] = chat_history
 
 
