@@ -61,51 +61,49 @@ def main():
         col1, col2,col3= st.container(),st.container(),st.container()
         st.title("")
 
-
         with col2:
             st.header("对话")
             keys=[]
             message = st.text_area("You", height=100, value="", key="input")
-            with st.expander("填充你自己的API"):
+            with st.expander("配置项"):
+                model = st.selectbox("选择模型", list(models.keys()))
                 st.write("输入你的openai-key,并回车")
                 api_key1,api_key2,api_key3 = st.text_input("api-key1"),st.text_input("api-key2"),st.text_input("api-key3")
                 keys = [key for key in [api_key1, api_key2, api_key3] if key] # 如果存在就加进去
                 st.write(keys)
 
 
-            model = st.selectbox("选择模型", list(models.keys()))
 
-            if st.button("发送",use_container_width=True):
-                chat_history = st.session_state.state["chat_history"]
-                # 清除重复聊天记录
-                chat_history.append("You: " + message) if "You: " + message not in chat_history else chat_history.append(
-                    "You: " + "")
-                index = len(chat_history) % len(keys)  # 使用取模操作来循环使用API key
+            coll1,coll2,coll3=st.columns(3)
+            with coll1:
+                if st.button("发送",use_container_width=True):
+                    chat_history = st.session_state.state["chat_history"]
+                    # 清除重复聊天记录
+                    chat_history.append("You: " + message) if "You: " + message not in chat_history else chat_history.append(
+                        "You: " + "")
+                    index = len(chat_history) % len(keys)  # 使用取模操作来循环使用API key
 
-                response = generate_response("\n".join(chat_history), models[model], keys[index])
-                chat_history.append("ChatGPT: " + response)
-                st.session_state.state["chat_history"] = chat_history
+                    response = generate_response("\n".join(chat_history), models[model], keys[index])
+                    chat_history.append("ChatGPT: " + response)
+                    st.session_state.state["chat_history"] = chat_history
 
-
-            if st.button("保存聊天记录",use_container_width=True):
-                st.write(save_chat_history(st.session_state.state["chat_history"]), unsafe_allow_html=True)
-
-            if st.button("重开一个对话",use_container_width=True):
-                st.session_state.state = get_state()
-
-            # 添加博客链接
+            with coll2:
+                if st.button("保存聊天记录",use_container_width=True):
+                    st.write(save_chat_history(st.session_state.state["chat_history"]), unsafe_allow_html=True)
+            with coll3:
+                if st.button("重开一个对话",use_container_width=True):
+                    st.session_state.state = get_state()
+                # 添加博客链接
             st.markdown("""
-            <div style="text-align:center;">
-    <a class="link" href="https://yang1he.gitee.io" target="_blank">作者链接</a>
-</div>
-            """, unsafe_allow_html=True)
+                <div style="text-align:center;">
+        <a class="link" href="https://yang1he.gitee.io" target="_blank">作者链接</a>
+    </div>
+                """, unsafe_allow_html=True)
         with col1:
             st.header("聊天记录")
-
             for msg in st.session_state.state["chat_history"]:
                 st.markdown("---")
                 st.write(msg)
-
         with col3:
             chat_count = sum(1 for item in st.session_state.state["chat_history"] if isinstance(item, str)
                          or (isinstance(item, dict)
