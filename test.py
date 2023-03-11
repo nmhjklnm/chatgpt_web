@@ -1,18 +1,33 @@
 import streamlit as st
+import speech_recognition as sr
+from gtts import gTTS
+from pydub import AudioSegment
+from pydub.playback import play
 
-import numpy as np
+def transcribe():
+    r = sr.Recognizer()
+    st.write("请开始说话")
+    with sr.Microphone() as source:
+        audio_data = r.record(source, duration=5)
+        st.write("识别中...")
+        text = r.recognize_google(audio_data, language='zh-CN')
+        st.write(f"识别结果：{text}")
+    return text
 
-audio_file = open('myaudio.ogg', 'rb')
-audio_bytes = audio_file.read()
 
-st.audio(audio_bytes, format='audio/ogg')
+def speak(text):
+    tts = gTTS(text, lang='zh-cn')
+    tts.save("output.mp3")
+    sound = AudioSegment.from_mp3("output.mp3")
+    play(sound)
 
-sample_rate = 44100  # 44100 samples per second
-seconds = 2  # Note duration of 2 seconds
-frequency_la = 440  # Our played note will be 440 Hz
-# Generate array with seconds*sample_rate steps, ranging between 0 and seconds
-t = np.linspace(0, seconds, seconds * sample_rate, False)
-# Generate a 440 Hz sine wave
-note_la = np.sin(frequency_la * t * 2 * np.pi)
 
-st.audio(note_la, sample_rate=sample_rate)
+st.title("语音转文本")
+
+if st.button("录入"):
+    text = transcribe()
+    if st.button("播放"):
+        if text:
+            speak(text)
+        else:
+            st.write("请先录入文本")
