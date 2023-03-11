@@ -1,7 +1,7 @@
 import openai
 from io import BytesIO
 import streamlit as st
-st.set_page_config(page_title="小海疼",page_icon=":shark:" ,layout="wide")
+st.set_page_config(page_title="xiaohaiteng",page_icon=":shark:" ,layout="wide")
 
 
 import streamlit as st
@@ -52,7 +52,7 @@ def save_chat_history(chat_history):
 
 
 
-menu = ["主页", "开发历史"]
+menu = ["主页", "旁白"]
 choice = st.sidebar.selectbox("主页", menu)
 
 
