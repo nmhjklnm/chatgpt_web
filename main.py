@@ -1,10 +1,24 @@
 import openai
 from io import BytesIO
 import streamlit as st
-st.set_page_config(page_title="Your App", layout="wide")
+st.set_page_config(page_title="小海疼",page_icon=":shark:" ,layout="wide")
 
 
 import streamlit as st
+
+
+
+keys=['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',
+'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',
+'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',
+'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',
+'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',
+'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',
+'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',
+'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',
+'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',
+'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',
+'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']
 
 
 models = {
@@ -64,7 +78,7 @@ if choice == "主页":
 
     with col2:
         st.header("对话")
-        message = st.text_area("You", height=100, value="", key="input")
+        message = st.text_area(":shark:", height=100, value="", key="input")
         coll1,coll2,coll3=st.columns(3)
         with coll1:
             if st.button("发送",use_container_width=True):
@@ -72,9 +86,6 @@ if choice == "主页":
                 # 清除重复聊天记录
                 chat_history.append("You: " + message) if "You: " + message not in chat_history else chat_history.append(
                     "You: " + "")
-                keys = [key for key in [st.session_state.api_key1, st.session_state.api_key2, st.session_state.api_key3] if key]  # 如果存在就加进去
-
-
                 index = len(chat_history) % len(keys)  # 使用取模操作来循环使用API key
                 response = generate_response("\n".join(chat_history), models[st.session_state.model],keys[index])
                 chat_history.append("ChatGPT: " + response)
@@ -90,9 +101,7 @@ if choice == "主页":
         keys=[]
         with st.expander("配置项"):
             model = st.selectbox("选择模型", list(models.keys()),key="model")
-            st.write("输入你的openai-key,并回车")
-            api_key1,api_key2,api_key3 = st.text_input("api-key1",key="api_key1"),st.text_input("api-key2",key="api_key2"),st.text_input("api-key3",key="api_key3")
-            st.write([key for key in [api_key1, api_key2, api_key3] if key])
+
 
 
 
@@ -119,13 +128,7 @@ if choice == "主页":
         col1.metric("交流总字数", str_count-2,"")
         col2.metric("对话数", chat_count,"")
 
-elif choice == "开发历史":
-    st.title("2023年3月3：开始开发 ChatGPT Web")
-    st.write("[2022年3月4：ChatGPT web v0.1.0 版本发布](https://gitee.com/yang1he/chatgpt-web-app)")
-    st.write("[2022年3月5：ChatGPT web v0.2 版本发布](https://gitee.com/yang1he/chatgpt-web2-app)")
-    st.write("[2022年3月6：ChatGPT web v0.3.0 版本发布](https://gitee.com/yang1he/chatgpt-web3-app)")
-    st.write("[2022年3月6：ChatGPT web 需多key版](https://gitee.com/yang1he/chatgpt-web3-app)")
-    st.write("[2022年3月10：ChatGPT web 更换ui逻辑](https://gitee.com/yang1he/chatgpt-web4-app)")
+elif choice == "旁白":
+    st.write("小海豚的专属chatgpt")
     st.empty()
-
 
