@@ -89,7 +89,7 @@ if choice == "主页":
                 index = len(chat_history) % len(keys)  # 使用取模操作来循环使用API key
                 if "model" not in st.session_state:
                         st.session_state.model =models["gpt-3.5-turbo"]
-                 try:
+                try:
 	                response = generate_response("\n".join(chat_history), models[st.session_state.model],keys[index])
                 except:
 	                st.error("api-key"+index+'已无法使用,请联系开发人员', icon="🚨")
