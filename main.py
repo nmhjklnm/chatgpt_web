@@ -92,7 +92,7 @@ if choice == "主页":
                 try:
 	                response = generate_response("\n".join(chat_history), models[st.session_state.model],keys[index])
                 except:
-	                st.error("api-key"+index+'已无法使用,请联系开发人员', icon="🚨")
+	                st.error(f"api-key{index}已无法使用,请联系开发人员", icon="🚨")
                 
                 chat_history.append("ChatGPT: " + response)
                 st.session_state.state["chat_history"] = chat_history
