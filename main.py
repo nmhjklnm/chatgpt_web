@@ -87,6 +87,8 @@ if choice == "主页":
                 chat_history.append("You: " + message) if "You: " + message not in chat_history else chat_history.append(
                     "You: " + "")
                 index = len(chat_history) % len(keys)  # 使用取模操作来循环使用API key
+                if "model" not in st.session_state:
+                        st.session_state.model =models[0]
                 response = generate_response("\n".join(chat_history), models[st.session_state.model],keys[index])
                 chat_history.append("ChatGPT: " + response)
                 st.session_state.state["chat_history"] = chat_history
