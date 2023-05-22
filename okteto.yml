@@ -12,9 +12,9 @@ build:
 #       SOURCE_IMAGE: ${OKTETO_BUILD_BASE_IMAGE}
 #     secrets:
 #       npmrc: .npmrc
-# deploy:
-#   - docker build -f Dockerfile -t streamlit ./
-#   - docker run -p 8080:8080 streamlit
+deploy:
+  - where python
+  - pip show list
 dev:
   api:
     command: ["bash"]
