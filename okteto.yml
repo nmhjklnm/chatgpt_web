@@ -13,6 +13,7 @@ build:
 #     secrets:
 #       npmrc: .npmrc
 deploy:
+  - docker build -f Dockerfile -t streamlit ./
   - docker run -p 8080:8080 streamlit
 dev:
   api:
