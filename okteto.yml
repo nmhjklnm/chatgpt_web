@@ -3,11 +3,11 @@ build:
     context: .
 #   api:
 #     context: api
-  frontend:
-    context: frontend
-    dockerfile: Dockerfile
-    target: dev
-    depends_on: base
+#   frontend:
+#     context: frontend
+#     dockerfile: Dockerfile
+#     target: dev
+#     depends_on: base
 #     args:
 #       SOURCE_IMAGE: ${OKTETO_BUILD_BASE_IMAGE}
 #     secrets:
