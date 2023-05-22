@@ -13,8 +13,8 @@ build:
 #     secrets:
 #       npmrc: .npmrc
 deploy:
-  - where python
-  - pip show list
+  - pwd
+  - streamlit run main.py
 dev:
   api:
     command: ["bash"]
