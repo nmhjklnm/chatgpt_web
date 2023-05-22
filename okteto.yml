@@ -1,6 +1,22 @@
-name: sample
-deploy:
+build:
+  base:
+    context: .
   api:
-    build: .
-    command: ["streamlit", "run", "app.py"]
-    public: true
+    context: api
+  frontend:
+    context: frontend
+    dockerfile: Dockerfile
+    target: dev
+    depends_on: base
+#     args:
+#       SOURCE_IMAGE: ${OKTETO_BUILD_BASE_IMAGE}
+#     secrets:
+#       npmrc: .npmrc
+deploy:
+  - streamlit run main.py
+dev:
+  api:
+    command: ["bash"]
+    forward:
+      - 8080:8501
+
