@@ -13,10 +13,12 @@ build:
 #     secrets:
 #       npmrc: .npmrc
 deploy:
-  - streamlit run main.py
+  - docker run -p 8080:8080 streamlit
 dev:
   api:
     command: ["bash"]
     forward:
       - 8080:8080
+#   frontend:
+#     command: streamlit run main.py
 
