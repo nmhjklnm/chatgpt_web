@@ -1,4 +1,6 @@
 name: sample
 deploy:
-  - command: ["streamlit", "run", "app.py"]
+  api:
+    build: .
+    command: ["streamlit", "run", "app.py"]
     public: true
