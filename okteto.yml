@@ -17,7 +17,7 @@ deploy:
   - streamlit run main.py
 dev:
   api:
-    command: ["bash"]
+#     command: ["bash"]
     forward:
       - 8080:8080
 #   frontend:
