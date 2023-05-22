@@ -14,9 +14,9 @@ build:
 #       npmrc: .npmrc
 deploy:
   - streamlit run main.py
-dev:
-  api:
-    command: ["bash"]
-    forward:
-      - 8080:8501
+# dev:
+#   api:
+#     command: ["bash"]
+#     forward:
+#       - 8080:8501
 
