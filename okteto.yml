@@ -1,3 +1,4 @@
-name: chatgpt_web
-public: true
-command: streamlit run main.py
+name: sample
+deploy:
+  - command: ["streamlit", "run", "app.py"]
+    public: true
