@@ -18,5 +18,5 @@ dev:
   api:
     command: ["bash"]
     forward:
-      - 8501:8501
+      - 8080:8080
 
