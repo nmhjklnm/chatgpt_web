@@ -3,6 +3,6 @@ services:
   app:
     build: .
     command: >
-      cmd "streamlit run main.py --server.port=8080"
+      bash -c 'python -m streamlit run main.py'
     ports:
       - 8080:8080
