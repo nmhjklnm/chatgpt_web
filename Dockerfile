@@ -1,9 +1,5 @@
 FROM python:3.11
 
-RUN echo '[global]' > /etc/pip.conf && \
-    echo 'index-url = https://mirrors.aliyun.com/pypi/simple/' >> /etc/pip.conf && \
-    echo 'trusted-host = mirrors.aliyun.com' >> /etc/pip.conf
-
 
 WORKDIR /app
 RUN apt-get update && apt-get install -y \
